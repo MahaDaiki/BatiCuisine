@@ -52,6 +52,10 @@ public class Client {
     }
 
     public void setEst_professionnel(boolean est_professionnel) {
+
         this.est_professionnel = est_professionnel;
+    }
+    public String toString() {
+        return  Client_id+ "_" + nom + ":" + adresse + " ," + telephone + " ," + est_professionnel;
     }
 }
