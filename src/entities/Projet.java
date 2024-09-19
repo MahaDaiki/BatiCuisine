@@ -9,19 +9,20 @@ public class Projet {
         private Double margeBeneficiaire;
         private Double coutTotal;
         private EtatProjet etatProjet;
+        private Double surface;
         private Integer clientId;
-        private Integer componentId;
+
 
 
         public Projet(Integer projetId, String nomProjet, Double margeBeneficiaire, Double coutTotal,
-                       EtatProjet etatProjet, Integer clientId, Integer componentId) {
+                       EtatProjet etatProjet,Double surface ,Integer clientId) {
             this.projetId = projetId;
             this.nomProjet = nomProjet;
             this.margeBeneficiaire = margeBeneficiaire;
             this.coutTotal = coutTotal;
             this.etatProjet = etatProjet;
+            this.surface = surface;
             this.clientId = clientId;
-            this.componentId = componentId;
         }
 
         // Getters and Setters
@@ -73,24 +74,26 @@ public class Projet {
             this.clientId = clientId;
         }
 
-        public Integer getComponentId() {
-            return componentId;
+        public Double getSurface() {
+            return surface;
         }
 
-        public void setComponentId(Integer componentId) {
-            this.componentId = componentId;
+        public void setSurface(Double surface) {
+            this.surface = surface;
         }
 
         @Override
         public String toString() {
             return   projetId +
                     "_ Nom du Projet='" + nomProjet + '\'' +
-                    ", margeBeneficiaire=" + margeBeneficiaire +
+                    ", margeBeneficiaire=" + margeBeneficiaire +", surface=" + surface +
                     ", coutTotal=" + coutTotal +
                     ", etatProjet=" + etatProjet +
-                    ", clientId=" + clientId +
-                    ", componentId=" + componentId ;
+                    ", clientId=" + clientId
+                    ;
         }
-    }
+
+
+}
 
 

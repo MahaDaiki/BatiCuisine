@@ -10,16 +10,18 @@ public class Composant {
         private Double quantite;
         private Double tauxTVA;
         private TypeComposant typeComposant;
+        private Integer ProjetId;
 
 
         public Composant(Integer composantId, String nom, Double coutUnitaire, Double quantite, Double tauxTVA,
-                         TypeComposant typeComposant) {
+                         TypeComposant typeComposant, Integer ProjetId) {
             this.composantId = composantId;
             this.nom = nom;
             this.coutUnitaire = coutUnitaire;
             this.quantite = quantite;
             this.tauxTVA = tauxTVA;
             this.typeComposant = typeComposant;
+            this.ProjetId = ProjetId;
 
         }
 
@@ -72,7 +74,13 @@ public class Composant {
             this.typeComposant = typeComposant;
         }
 
+        public Integer getProjetId() {
+            return ProjetId;
+        }
 
+        public void setProjetId(Integer projetId) {
+            ProjetId = projetId;
+        }
 
         @Override
         public String toString() {
@@ -81,8 +89,11 @@ public class Composant {
                     ", coutUnitaire=" + coutUnitaire +
                     ", quantite=" + quantite +
                     ", tauxTVA=" + tauxTVA +
-                    ", typeComposant=" + typeComposant ;
+                    ", typeComposant=" + typeComposant +
+                    ", ProjetId=" + ProjetId;
         }
-    }
+
+
+}
 
 
