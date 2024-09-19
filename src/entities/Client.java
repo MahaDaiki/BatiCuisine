@@ -47,7 +47,7 @@ public class Client {
         this.telephone = telephone;
     }
 
-    public boolean isEst_professionnel() {
+    public boolean getEst_professionnel() {
         return est_professionnel;
     }
 

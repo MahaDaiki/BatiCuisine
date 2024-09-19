@@ -28,7 +28,7 @@ public class ClientRepositoryImpl implements ClientRepository {
             ps.setString(1, client.getNom());
             ps.setString(2, client.getAdresse());
             ps.setString(3, client.getTelephone());
-            ps.setBoolean(4, client.isEst_professionnel());
+            ps.setBoolean(4, client.getEst_professionnel());
             ps.executeUpdate();
             System.out.println("Client ajouté avec succès !");
         } catch (SQLException e) {
