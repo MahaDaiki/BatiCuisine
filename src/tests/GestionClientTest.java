@@ -4,6 +4,7 @@ import entities.Client;
 import services.implementations.ClientServiceImpl;
 import services.interfaces.ClientService;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class GestionClientTest {
@@ -26,7 +27,7 @@ public class GestionClientTest {
 
         switch (clientChoice) {
             case 1:
-
+                rechercherNouveauClient();
                 break;
             case 2:
                 ajouterNouveauClient();
@@ -36,7 +37,7 @@ public class GestionClientTest {
         }
     }
 
-    public static void ajouterNouveauClient() {
+    private static void ajouterNouveauClient() {
         System.out.print("_ Le nom du client : ");
         String nom = scanner.nextLine();
 
@@ -53,6 +54,24 @@ public class GestionClientTest {
         Client client = new Client(0,nom, adresse, telephone, estProfessionnel);
         clientService.addClient(client);
     }
+
+    private static void rechercherNouveauClient() {
+        System.out.print("_ Le nom du client : ");
+        String nom = scanner.nextLine();
+        Optional<Client> client = clientService.findClientByName(nom);
+        client.ifPresent(
+          c-> {
+              int ClientId = c.getClient_id();
+              System.out.println("Client trouvé !");
+              System.out.println("Nom : " + c.getNom());
+              System.out.println("Adresse : " + c.getAdresse());
+              System.out.println("Numéro de téléphone : " + c.getTelephone());
+              System.out.println("Professionnel : " + c.getEst_professionnel());
+          }
+        );
+
+    }
+
 
 
     }
