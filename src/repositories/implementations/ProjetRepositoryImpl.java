@@ -93,4 +93,19 @@ public class ProjetRepositoryImpl implements ProjetRepository {
             System.err.println("Fail: " + e.getMessage());
         }
     }
+    @Override
+    public int getLastInsertedProjetId() {
+        String sql = "SELECT currval(pg_get_serial_sequence('projets', 'projet_id'))";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.err.println("Failed to get last inserted projet ID: " + e.getMessage());
+        }
+        return -1;
+    }
+
 }

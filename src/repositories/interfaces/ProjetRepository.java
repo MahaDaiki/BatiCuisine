@@ -9,5 +9,6 @@ public interface ProjetRepository {
     List<Projet> getAllProjets();
     void updateProjet(Projet projet, int projet_id);
     void updateProjetStatus(Projet projet, int projet_id);
+    int getLastInsertedProjetId();
 
 }

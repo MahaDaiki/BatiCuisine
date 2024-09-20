@@ -11,7 +11,7 @@ public class MainDoeuvre extends Composant {
 
     public MainDoeuvre(Integer composantId, String nom, Double coutUnitaire, Double quantite, Double tauxTVA,
                        Double tauxHoraire, Double heuresTravail, Double productiviteOuvrier, Integer projetId) {
-        super(composantId, nom, coutUnitaire, quantite, tauxTVA,TypeComposant.Main_d_oeuvre, projetId);
+        super(composantId, nom, coutUnitaire, quantite, tauxTVA,TypeComposant.Main_doeuvre, projetId);
         this.tauxHoraire = tauxHoraire;
         this.heuresTravail = heuresTravail;
         this.productiviteOuvrier = productiviteOuvrier;

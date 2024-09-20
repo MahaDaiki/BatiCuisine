@@ -19,8 +19,9 @@ public class GestionClientTest {
         System.out.println("=========================================================================");
         System.out.println("|                 1. Chercher un client existant.                       |");
         System.out.println("|                 2. Ajouter un nouveau client.                         |");
+        System.out.println("|                 3. <------ Back.                                      |");
         System.out.println("=========================================================================");
-        System.out.print("--> ");
+        System.out.print("---> ");
 
         int clientChoice = scanner.nextInt();
         scanner.nextLine();
@@ -31,6 +32,9 @@ public class GestionClientTest {
                 break;
             case 2:
                 ajouterNouveauClient();
+                break;
+            case 3:
+                MenusTest.menu();
                 break;
             default:
                 System.out.println("Option invalide, veuillez réessayer.");
