@@ -20,7 +20,7 @@ public class MenusTest {
             System.out.println("|  3. Calculer le coût d'un projet   |");
             System.out.println("|  4. Quitter                        |");
             System.out.println("=====================================");
-            System.out.print("- ");
+            System.out.print("---> ");
 
             int choice = scanner.nextInt();
             scanner.nextLine();

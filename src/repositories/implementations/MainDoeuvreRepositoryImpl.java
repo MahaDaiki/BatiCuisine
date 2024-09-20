@@ -29,10 +29,9 @@ public class MainDoeuvreRepositoryImpl implements MainDoeuvreRepository {
                 pstmt.setDouble(6, heuresTravail);
                 pstmt.setDouble(7, mainDoeuvre.getProductiviteOuvrier());
                 pstmt.setInt(8, projectId);
-                pstmt.setString(9, mainDoeuvre.getTypeComposant().name());
-
+                pstmt.setObject(9, mainDoeuvre.getTypeComposant().name(), java.sql.Types.OTHER);
                 pstmt.executeUpdate();
-                System.out.println("Main d'Œuvre ajoutée avec succès !");
+
             } catch (SQLException e) {
                 System.err.println("Failed to add Main d'Œuvre: " + e.getMessage());
             }

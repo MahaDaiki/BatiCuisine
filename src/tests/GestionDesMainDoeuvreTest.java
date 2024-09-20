@@ -18,9 +18,9 @@ public class GestionDesMainDoeuvreTest {
 
         String response;
         do {
-            System.out.println("--- Main-d'œuvre ---");
+            System.out.println("*--- Main-d'œuvre ---*");
 
-            System.out.print("Entrez le type de main-d'œuvre : ");
+            System.out.print("Entrez main-d'œuvre : ");
             String nom = scanner.nextLine();
 
             System.out.print("Entrez le taux horaire de cette main-d'œuvre (dh/h) : ");
@@ -61,6 +61,7 @@ public class GestionDesMainDoeuvreTest {
         } while (response.equalsIgnoreCase("y" ) || response.equalsIgnoreCase("yes"));
 
         System.out.println("Retour au menu principal.");
+        GestionClientTest.NouveauProjet();
 
     }
 }
