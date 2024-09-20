@@ -27,7 +27,7 @@ public class MenusTest {
 
             switch (choice) {
                 case 1:
-
+                    GestionClientTest.NouveauProjet();
                     break;
                 case 2:
 
