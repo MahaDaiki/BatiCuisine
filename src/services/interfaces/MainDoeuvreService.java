@@ -1,9 +1,8 @@
-package repositories.interfaces;
+package services.interfaces;
 
 import entities.MainDoeuvre;
 
-public interface MainDoeuvreRepository {
+public interface MainDoeuvreService {
     void addMainDoeuvre(MainDoeuvre mainDoeuvre , int projectId);
     double calculateTauxHoraire(double couTotal, double heuresTravaille);
-
 }

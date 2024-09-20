@@ -29,4 +29,9 @@ final ProjetRepository projetRepository = new ProjetRepositoryImpl();
     public void updateProjetStatus(Projet projet, int projet_id) {
         projetRepository.updateProjetStatus(projet, projet_id);
     }
+
+    @Override
+    public int getLastInsertedProjetId() {
+        return projetRepository.getLastInsertedProjetId();
+    }
 }

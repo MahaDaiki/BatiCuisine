@@ -17,7 +17,7 @@ public class GestionProjetTest {
     }
 
         static void ajouterUnProjet(int clientId){
-            Scanner scanner = new Scanner(System.in);
+
 
             System.out.print("Entrez le nom du projet: ");
             String nomProjet = scanner.nextLine();
@@ -29,6 +29,15 @@ public class GestionProjetTest {
 
 
             projetService.addProjet(projet, clientId);
+
+            int projetId = projetService.getLastInsertedProjetId();
+
+            if (projetId != -1) {
+                System.out.println("Projet ajouté avec succès avec ID: " + nomProjet);
+                GestionDesMainDoeuvreTest.AddMainDoeuvre(projetId);
+            } else {
+                System.out.println("Erreur lors de l'obtention de l'ID du projet.");
+            }
         }
 
         }
