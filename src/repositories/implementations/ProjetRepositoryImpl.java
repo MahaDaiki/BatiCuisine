@@ -15,7 +15,7 @@ public class ProjetRepositoryImpl implements ProjetRepository {
     final Connection connection = DatabaseConnection.getInstance().getConnection();
 
     @Override
-    public void addProjet(Projet projet) {
+    public void addProjet(Projet projet, int client_id) {
         String sql = "INSERT INTO projet (nom_projet ,marge_beneficiaire, cout_total, etat_projet, surface, client_id ) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
