@@ -4,11 +4,9 @@ import database.DatabaseConnection;
 import entities.Projet;
 import enums.EtatProjet;
 import repositories.interfaces.ProjetRepository;
-import utils.InputValidator;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ProjetRepositoryImpl implements ProjetRepository {
@@ -16,7 +14,7 @@ public class ProjetRepositoryImpl implements ProjetRepository {
 
     @Override
     public void addProjet(Projet projet, int client_id) {
-        String sql = "INSERT INTO projet (nom_projet ,marge_beneficiaire, cout_total, etat_projet, surface, client_id ) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO projets (nom_projet ,marge_beneficiaire, cout_total, etat_projet, surface, client_id ) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, projet.getNomProjet());
@@ -32,7 +30,7 @@ public class ProjetRepositoryImpl implements ProjetRepository {
             } else {
                 pstmt.setNull(3, Types.DOUBLE);
             }
-            pstmt.setString(4, projet.getEtatProjet().name());
+            pstmt.setObject(4, projet.getEtat_projet().name(), java.sql.Types.OTHER);
             pstmt.setDouble(5, projet.getSurface());
             pstmt.setInt(6, projet.getClientId());
 
@@ -88,7 +86,7 @@ public class ProjetRepositoryImpl implements ProjetRepository {
     public void updateProjetStatus(Projet projet, int projet_id) {
         String sql = " UPDATE projets SET etat_projet = ? WHERE projet_id = ? ";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, projet.getEtatProjet().name());
+            pstmt.setString(1, projet.getEtat_projet().name());
             pstmt.executeUpdate();
             System.out.println(" ETAT DU PROJET MODIFIE!");
         } catch (SQLException e) {

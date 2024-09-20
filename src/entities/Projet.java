@@ -8,19 +8,19 @@ public class Projet {
         private String nomProjet;
         private Double margeBeneficiaire;
         private Double coutTotal;
-        private EtatProjet etatProjet;
+        private EtatProjet etat_projet;
         private Double surface;
         private Integer clientId;
 
 
 
         public Projet(Integer projetId, String nomProjet, Double margeBeneficiaire, Double coutTotal,
-                       EtatProjet etatProjet,Double surface ,Integer clientId) {
+                      EtatProjet etat_projet, Double surface , Integer clientId) {
             this.projetId = projetId;
             this.nomProjet = nomProjet;
             this.margeBeneficiaire = margeBeneficiaire;
             this.coutTotal = coutTotal;
-            this.etatProjet = etatProjet;
+            this.etat_projet = etat_projet;
             this.surface = surface;
             this.clientId = clientId;
         }
@@ -58,12 +58,12 @@ public class Projet {
             this.coutTotal = coutTotal;
         }
 
-        public EtatProjet getEtatProjet() {
-            return etatProjet;
+        public EtatProjet getEtat_projet() {
+            return etat_projet;
         }
 
-        public void setEtatProjet(EtatProjet etatProjet) {
-            this.etatProjet = etatProjet;
+        public void setEtat_projet(EtatProjet etat_projet) {
+            this.etat_projet = etat_projet;
         }
 
         public Integer getClientId() {
@@ -88,7 +88,7 @@ public class Projet {
                     "_ Nom du Projet='" + nomProjet + '\'' +
                     ", margeBeneficiaire=" + margeBeneficiaire +", surface=" + surface +
                     ", coutTotal=" + coutTotal +
-                    ", etatProjet=" + etatProjet +
+                    ", etat_projet=" + etat_projet +
                     ", clientId=" + clientId
                     ;
         }
