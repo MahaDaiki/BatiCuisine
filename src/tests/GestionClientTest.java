@@ -34,6 +34,7 @@ public class GestionClientTest {
                 break;
             default:
                 System.out.println("Option invalide, veuillez réessayer.");
+                NouveauProjet();
         }
     }
 
@@ -53,25 +54,44 @@ public class GestionClientTest {
 
         Client client = new Client(0,nom, adresse, telephone, estProfessionnel);
         clientService.addClient(client);
+        System.out.println("Ajout d'un nouveau projet avec le client: " + client.getNom());
+
+
+        GestionProjetTest.ajouterUnProjet(client.getClient_id());
+
+
     }
 
     private static void rechercherNouveauClient() {
-        System.out.print("_ Le nom du client : ");
-        String nom = scanner.nextLine();
-        Optional<Client> client = clientService.findClientByName(nom);
-        client.ifPresent(
-          c-> {
-              int ClientId = c.getClient_id();
-              System.out.println("Client trouvé !");
-              System.out.println("Nom : " + c.getNom());
-              System.out.println("Adresse : " + c.getAdresse());
-              System.out.println("Numéro de téléphone : " + c.getTelephone());
-              System.out.println("Professionnel : " + c.getEst_professionnel());
-          }
-        );
+            System.out.print("_ Le nom du client : ");
+            String nom = scanner.nextLine();
 
-    }
+            Optional<Client> client = clientService.findClientByName(nom);
 
+            if (client.isPresent()) {
+                Client c = client.get();
+                System.out.println("Client trouvé !");
+                System.out.println("Nom : " + c.getNom());
+                System.out.println("Adresse : " + c.getAdresse());
+                System.out.println("Numéro de téléphone : " + c.getTelephone());
+                System.out.println("Professionnel : " + c.getEst_professionnel());
 
+                System.out.print("Souhaitez-vous continuer avec ce client ? (y/n) : ");
+                String response = scanner.nextLine();
 
+                if (response.equalsIgnoreCase("y" ) || response.equalsIgnoreCase("yes")){
+                    System.out.println("Ajout d'un nouveau projet avec le client: " + c.getNom());
+                    GestionProjetTest.ajouterUnProjet(c.getClient_id());
+                } else {
+                    System.out.println("<--- Retour.");
+                    NouveauProjet();
+                }
+            } else {
+
+                System.out.println("Aucun client trouvé avec le nom : " + nom);
+                System.out.println("<--- Retour au menu.");
+                NouveauProjet();
+            }
+
+        }
     }
