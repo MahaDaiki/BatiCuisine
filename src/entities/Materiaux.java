@@ -7,7 +7,7 @@ import enums.TypeComposant;
 public class Materiaux extends Composant{
     private Double coefficientQualite;
     private Double coutTransport;
-    public Materiaux(Integer composantId, String nom, Double coutUnitaire, Double quantite, Double tauxTVA, TypeComposant typeComposant, Integer projetId, Double coefficientQualite, Double coutTransport) {
+    public Materiaux(Integer composantId, String nom, Double coutUnitaire, Double quantite, Double tauxTVA, Integer projetId, Double coefficientQualite, Double coutTransport) {
         super(composantId, nom, coutUnitaire, quantite, tauxTVA,TypeComposant.Matériel, projetId );
         this.coefficientQualite = coefficientQualite;
         this.coutTransport = coutTransport;

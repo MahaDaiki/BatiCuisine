@@ -35,7 +35,7 @@ public class ProjetRepositoryImpl implements ProjetRepository {
             pstmt.setInt(6, projet.getClientId());
 
             pstmt.executeUpdate();
-            System.out.println("Projet added successfully!");
+
         } catch (SQLException e) {
             System.err.println("Failed to add projet: " + e.getMessage());
         }
