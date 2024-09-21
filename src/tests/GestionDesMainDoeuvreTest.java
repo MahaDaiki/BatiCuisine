@@ -26,7 +26,7 @@ public class GestionDesMainDoeuvreTest {
             System.out.print("Entrez le taux horaire de cette main-d'œuvre (dh/h) : ");
             double tauxHoraire = scanner.nextDouble();
 
-            System.out.print("Entrez le nombre d'heures  de travail : ");
+            System.out.print("Entrez les heures  de travail : ");
             double heuresTravaillees = scanner.nextDouble();
 
             System.out.print("Entrez le facteur de productivité (1.0 = standard, > 1.0 = haute productivité) : ");
@@ -34,6 +34,7 @@ public class GestionDesMainDoeuvreTest {
 
             System.out.print("Entrez le Taux TVA : ");
             double tauxTVA = scanner.nextDouble();
+
 
             scanner.nextLine();
 
@@ -60,9 +61,8 @@ public class GestionDesMainDoeuvreTest {
 
         } while (response.equalsIgnoreCase("y" ) || response.equalsIgnoreCase("yes"));
 
-        System.out.println("Retour au menu principal.");
-        GestionClientTest.NouveauProjet();
-
+        System.out.println("<----- Retour.");
+        GestionProjetTest.lastinsertedprojet();
     }
 }
 
