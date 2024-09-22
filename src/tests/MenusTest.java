@@ -30,7 +30,7 @@ public class MenusTest {
                     GestionClientTest.NouveauProjet();
                     break;
                 case 2:
-
+                        GestionProjetTest.displayallprojet();
                     break;
                 case 3:
 
