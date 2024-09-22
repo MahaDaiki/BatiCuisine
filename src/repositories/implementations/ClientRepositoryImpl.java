@@ -64,12 +64,13 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public List<Client> getAllClientsWithProjets() {
+    public List<Client> getAllClientsWithProjets(int clientId) {
 
             String sql = "SELECT c.client_id, c.client_name, c.client_address, c.client_phone, c.client_email, " +
                     "p.projet_id, p.nom_projet, p.marge_beneficiaire, p.cout_total, p.etat_projet, p.surface " +
                     "FROM clients c " +
-                    "INNER JOIN projets p ON c.client_id = p.client_id";
+                    "INNER JOIN projets p ON c.client_id = p.client_id"+
+                     "WHERE c.client_id = ?" ;
 
             List<Client> clients = new ArrayList<>();
 
