@@ -5,13 +5,14 @@ import enums.EtatProjet;
 import services.implementations.ProjetServiceImpl;
 import services.interfaces.ProjetService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class GestionProjetTest {
     static final Scanner scanner = new Scanner(System.in);
     static final ProjetService projetService = new ProjetServiceImpl();
     public static void main(String[] args) {
-
+        displayallprojet();
     }
 
         static void ajouterUnProjet(int clientId){
@@ -71,6 +72,24 @@ public class GestionProjetTest {
         } while (choice != 3);
     }
 
+    static void displayallprojet(){
+
+            List<Projet> projets = projetService.getAllProjets();
+
+            for (Projet projet : projets) {
+                System.out.println("*=========================================*");
+                System.out.println( "---> "+ projet.getProjetId() + "_ Nom du Projet: " + projet.getNomProjet());
+                System.out.println("|     Marge Bénéficiaire: " + projet.getMargeBeneficiaire());
+                System.out.println("|     Coût Total: " + projet.getCoutTotal());
+                System.out.println("|     État du Projet: " + projet.getEtat_projet());
+                System.out.println("|     Surface: " + projet.getSurface());
+                System.out.println("|     Client ID: " + projet.getClientId());
+
+
+        }
+
+
+    }
 
 }
 

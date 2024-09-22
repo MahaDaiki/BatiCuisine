@@ -2,14 +2,16 @@ package repositories.implementations;
 
 import database.DatabaseConnection;
 import entities.Client;
+import entities.Projet;
+import enums.EtatProjet;
 import repositories.interfaces.ClientRepository;
 import utils.InputValidator;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class ClientRepositoryImpl implements ClientRepository {
@@ -60,6 +62,53 @@ public class ClientRepositoryImpl implements ClientRepository {
         }
         return Optional.empty();
     }
+
+    @Override
+    public List<Client> getAllClientsWithProjets() {
+
+            String sql = "SELECT c.client_id, c.client_name, c.client_address, c.client_phone, c.client_email, " +
+                    "p.projet_id, p.nom_projet, p.marge_beneficiaire, p.cout_total, p.etat_projet, p.surface " +
+                    "FROM clients c " +
+                    "INNER JOIN projets p ON c.client_id = p.client_id";
+
+            List<Client> clients = new ArrayList<>();
+
+            try (Statement stmt = connection.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql)) {
+
+                while (rs.next()) {
+
+                    Client client = new Client(
+                            rs.getInt("Client_id"),
+                            rs.getString("nom"),
+                            rs.getString("adresse"),
+                            rs.getString("telephone"),
+                            rs.getBoolean("est_professionnel")
+                    );
+
+
+                    Projet projet = new Projet(
+                            rs.getInt("projet_id"),
+                            rs.getString("nom_projet"),
+                            rs.getDouble("marge_beneficiaire"),
+                            rs.getDouble("cout_total"),
+                            EtatProjet.valueOf(rs.getString("etat_projet")),
+                            rs.getDouble("surface"),
+                            rs.getInt("client_id")
+                    );
+
+                    clients.add(client);
+                }
+            } catch (SQLException e) {
+                System.err.println("Error retrieving clients with projets: " + e.getMessage());
+            }
+
+            return clients;
+        }
+
+
+
+
 }
 
 
