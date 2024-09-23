@@ -3,7 +3,11 @@ package tests;
 import entities.Client;
 import entities.Projet;
 import enums.EtatProjet;
+import services.implementations.MainDoeuvreServiceImpl;
+import services.implementations.MateriauxServiceImpl;
 import services.implementations.ProjetServiceImpl;
+import services.interfaces.MainDoeuvreService;
+import services.interfaces.MateriauxService;
 import services.interfaces.ProjetService;
 
 import java.util.HashMap;
@@ -13,6 +17,8 @@ import java.util.Scanner;
 public class GestionProjetTest {
     static final Scanner scanner = new Scanner(System.in);
     static final ProjetService projetService = new ProjetServiceImpl();
+    static final MainDoeuvreService mainDoeuvreService =  new MainDoeuvreServiceImpl();
+    static final MateriauxService materiauxService = new MateriauxServiceImpl();
     public static void main(String[] args) {
         displayallprojet();
     }
@@ -51,7 +57,7 @@ public class GestionProjetTest {
             System.out.println("\n---Ajouter Des Composant ---");
             System.out.println("1. Ajouter de nouveaux matériaux");
             System.out.println("2. Ajouter de la main-d'œuvre");
-            System.out.println("3. Retourner au menu principal");
+            System.out.println("3. Finaliser le Projet");
             System.out.print("----> ");
 
             choice = scanner.nextInt();
@@ -65,13 +71,12 @@ public class GestionProjetTest {
                     GestionDesMainDoeuvreTest.AddMainDoeuvre(projetId);
                     break;
                 case 3:
-                    System.out.println("Retour au menu principal.");
-                    GestionClientTest.NouveauProjet();
+                    updateMargeBeneficiaireEtCoutTotal(projetId);
                     break;
                 default:
                     System.out.println("Choix invalide. Veuillez réessayer.");
             }
-        } while (choice != 3);
+        } while (choice != 4);
     }
 
     static void displayallprojet(){
@@ -104,6 +109,7 @@ public class GestionProjetTest {
                     displayprojetdetails(projetId);
                     break;
                 case 2:
+                    GestionClientTest.NouveauProjet();
                     break;
                 default:
                     System.out.println("Choix invalide. Veuillez ressayer.");
@@ -129,6 +135,29 @@ public class GestionProjetTest {
             }
         }
     }
+
+    private static void updateMargeBeneficiaireEtCoutTotal(int projetId) {
+
+        System.out.print("Entrez la marge bénéficiaire (%) : ");
+        double margeBeneficiaire = scanner.nextDouble();
+        scanner.nextLine();
+
+
+        double totalMaterialCost = materiauxService.calculateTotalMaterialCost(projetId);
+        double totalMaindoeuvre = mainDoeuvreService.calculeMaiOuvreTotal(projetId);
+        double totalCost = totalMaterialCost + totalMaindoeuvre;
+
+        Projet projet = new Projet(projetId, null, margeBeneficiaire, totalCost, null, null, null);
+
+
+        projetService.updateProjet(projet, projetId);
+
+        System.out.println("Projet mis à jour avec succès avec la marge bénéficiaire de " + margeBeneficiaire + "% !");
+        System.out.println("Le coût total  : " + projet.getCoutTotal());
+        MenusTest.menu();
+    }
+
+
 
 }
 

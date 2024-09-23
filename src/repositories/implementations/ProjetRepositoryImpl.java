@@ -73,10 +73,11 @@ public class ProjetRepositoryImpl implements ProjetRepository {
 
     @Override
     public void updateProjet(Projet projet, int projet_id) {
-        String sql = "UPDATE projets SET marge_benefinicaire = ? , cout_total = ? WHERE projet_id = ? ";
+        String sql = "UPDATE projets SET marge_beneficiaire = ? , cout_total = ? WHERE projet_id = ? ";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setDouble(1, projet.getMargeBeneficiaire());
             pstmt.setDouble(2, projet.getCoutTotal());
+            pstmt.setInt(3, projet_id);
             pstmt.executeUpdate();
             System.out.println("Success !");
         } catch (SQLException e) {

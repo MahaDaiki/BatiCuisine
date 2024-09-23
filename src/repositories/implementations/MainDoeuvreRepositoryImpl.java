@@ -6,6 +6,7 @@ import repositories.interfaces.MainDoeuvreRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MainDoeuvreRepositoryImpl implements MainDoeuvreRepository {
@@ -30,10 +31,24 @@ public class MainDoeuvreRepositoryImpl implements MainDoeuvreRepository {
             }
         }
 
-        public double calculateTauxHoraire(double coutTotal, double heuresTravaille) {
-            if (heuresTravaille == 0) {
-                throw new IllegalArgumentException("Heures de travail ne peut pas être zéro.");
+    @Override
+    public double calculeMaiOuvreTotal(int projetId) {
+        String sql = "SELECT (taux_horaire * heures_travail * productivite_ouvrier) * taux_TVA AS total_cost " +
+                "FROM main_doeuvre WHERE projet_id = ?";
+        double totalCost = 0.0;
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, projetId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                totalCost += rs.getDouble("total_cost");
             }
-            return coutTotal / heuresTravaille;
+        } catch (SQLException e) {
+            System.err.println("Failed to calculate total labor cost: " + e.getMessage());
         }
+
+        return totalCost;
+    }
+
+
 }
