@@ -95,7 +95,8 @@ public class GestionProjetTest {
             }
            System.out.println("\n-----------------------");
             System.out.println("1_ Detail Du Projet.");
-            System.out.println("2_ <------ Menu");
+            System.out.println("2_ Modifier Status du Projet");
+            System.out.println("3_ <------ Menu");
         System.out.print("----> ");
 
        int choice = scanner.nextInt();
@@ -109,6 +110,9 @@ public class GestionProjetTest {
                     displayprojetdetails(projetId);
                     break;
                 case 2:
+
+                    break;
+                case 3:
                     GestionClientTest.NouveauProjet();
                     break;
                 default:
@@ -154,7 +158,10 @@ public class GestionProjetTest {
 
         System.out.println("Projet mis à jour avec succès avec la marge bénéficiaire de " + margeBeneficiaire + "% !");
         System.out.println("Le coût total  : " + projet.getCoutTotal());
-        MenusTest.menu();
+
+        System.out.println("Generation du devis:");
+        GestionduDevisTest.createDevis(totalCost,margeBeneficiaire,projetId);
+
     }
 
 
