@@ -2,6 +2,7 @@ package services.interfaces;
 
 import entities.Projet;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface ProjetService {
@@ -10,4 +11,5 @@ public interface ProjetService {
     void updateProjet(Projet projet, int projet_id);
     void updateProjetStatus(Projet projet, int projet_id);
     int getLastInsertedProjetId();
+    HashMap<String, Object> getProjectAndClientDetails(int projetId);
 }
