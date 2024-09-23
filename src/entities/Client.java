@@ -56,6 +56,6 @@ public class Client {
         this.est_professionnel = est_professionnel;
     }
     public String toString() {
-        return  Client_id+ "_" + nom + ":" + adresse + " ," + telephone + " ," + est_professionnel;
+        return  Client_id+ "_" + nom + ":  adresse:"  + adresse + "| telephone:" + telephone + " ," + est_professionnel;
     }
 }

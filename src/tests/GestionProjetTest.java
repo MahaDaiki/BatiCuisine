@@ -1,10 +1,12 @@
 package tests;
 
+import entities.Client;
 import entities.Projet;
 import enums.EtatProjet;
 import services.implementations.ProjetServiceImpl;
 import services.interfaces.ProjetService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -85,10 +87,47 @@ public class GestionProjetTest {
                 System.out.println("|     Surface: " + projet.getSurface());
                 System.out.println("|     Client ID: " + projet.getClientId());
 
+            }
+           System.out.println("\n-----------------------");
+            System.out.println("1_ Detail Du Projet.");
+            System.out.println("2_ <------ Menu");
+        System.out.print("----> ");
 
+       int choice = scanner.nextInt();
+        scanner.nextLine();
+
+            switch (choice){
+                case 1:
+                    System.out.print("Entrez le projet pour plus de détails: ");
+                    int projetId = scanner.nextInt();
+                    scanner.nextLine();
+                    displayprojetdetails(projetId);
+                    break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("Choix invalide. Veuillez ressayer.");
+
+            }
+    }
+
+    static void displayprojetdetails(int projetId){
+        HashMap<String, Object> details = projetService.getProjectAndClientDetails(projetId);
+
+        if (details.isEmpty()) {
+            System.out.println("No project found with ID: " + projetId);
+        } else {
+            Projet projet = (Projet) details.get("projet");
+            Client client = (Client) details.get("client");
+
+            System.out.println("Project Details: " + projet);
+
+            if (client != null) {
+                System.out.println("Client Details: " + client);
+            } else {
+                System.out.println("No associated client found.");
+            }
         }
-
-
     }
 
 }

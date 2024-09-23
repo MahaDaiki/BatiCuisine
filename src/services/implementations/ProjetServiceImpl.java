@@ -6,6 +6,7 @@ import repositories.interfaces.ProjetRepository;
 import services.interfaces.ProjetService;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProjetServiceImpl implements ProjetService {
@@ -33,5 +34,10 @@ final ProjetRepository projetRepository = new ProjetRepositoryImpl();
     @Override
     public int getLastInsertedProjetId() {
         return projetRepository.getLastInsertedProjetId();
+    }
+
+    @Override
+    public HashMap<String, Object> getProjectAndClientDetails(int projetId) {
+        return projetRepository.getProjectAndClientDetails(projetId);
     }
 }

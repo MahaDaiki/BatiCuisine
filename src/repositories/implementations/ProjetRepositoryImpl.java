@@ -1,12 +1,14 @@
 package repositories.implementations;
 
 import database.DatabaseConnection;
+import entities.Client;
 import entities.Projet;
 import enums.EtatProjet;
 import repositories.interfaces.ProjetRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProjetRepositoryImpl implements ProjetRepository {
@@ -107,5 +109,52 @@ public class ProjetRepositoryImpl implements ProjetRepository {
         }
         return -1;
     }
+
+    @Override
+    public HashMap<String, Object> getProjectAndClientDetails(int projetId) {
+        String sql = "SELECT p.projet_id, p.nom_projet, p.marge_beneficiaire, " +
+                "p.cout_total, p.etat_projet, p.surface, " +
+                "c.client_id, c.nom AS client_nom, " +
+                "c.adresse AS client_adresse, c.telephone AS client_telephone, " +
+                "c.est_professionnel " +
+                "FROM projets p " +
+                "LEFT JOIN clients c ON p.client_id = c.client_id " +
+                "WHERE p.projet_id = ?";
+
+        HashMap<String, Object> result = new HashMap<>();
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, projetId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Projet projet = new Projet(
+                        rs.getInt("projet_id"),
+                        rs.getString("nom_projet"),
+                        rs.getDouble("marge_beneficiaire"),
+                        rs.getDouble("cout_total"),
+                        EtatProjet.valueOf(rs.getString("etat_projet")),
+                        rs.getDouble("surface"),
+                        null
+                );
+
+                Client client = new Client(
+                        rs.getInt("client_id"),
+                        rs.getString("client_nom"),
+                        rs.getString("client_adresse"),
+                        rs.getString("client_telephone"),
+                        rs.getBoolean("est_professionnel")
+                );
+
+                result.put("projet", projet);
+                result.put("client", client);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Retrieval Failed: " + e.getMessage());
+        }
+        return result;
+    }
+
 
 }

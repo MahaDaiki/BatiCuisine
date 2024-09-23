@@ -2,6 +2,7 @@ package repositories.interfaces;
 
 import entities.Projet;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface ProjetRepository {
@@ -10,5 +11,5 @@ public interface ProjetRepository {
     void updateProjet(Projet projet, int projet_id);
     void updateProjetStatus(Projet projet, int projet_id);
     int getLastInsertedProjetId();
-
+    HashMap<String, Object> getProjectAndClientDetails(int projetId);
 }
