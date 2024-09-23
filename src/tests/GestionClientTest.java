@@ -60,8 +60,14 @@ public class GestionClientTest {
         clientService.addClient(client);
         System.out.println("Ajout d'un nouveau projet avec le client: " + client.getNom());
 
+        Optional<Client> optionalClient = clientService.findClientByName(nom);
 
-        GestionProjetTest.ajouterUnProjet(client.getClient_id());
+        if (optionalClient.isPresent()) {
+            Client addedClient = optionalClient.get();
+            GestionProjetTest.ajouterUnProjet(addedClient.getClient_id());
+        } else {
+            System.out.println("Erreur: Le client ajouté n'a pas été trouvé.");
+        }
 
 
     }

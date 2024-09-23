@@ -45,8 +45,6 @@ public class GestionDesMainDoeuvreTest {
                     tauxHoraire,
                     heuresTravaillees,
                     tauxTVA,
-                    tauxHoraire,
-                    heuresTravaillees,
                     productivite,
                     projetId
             );

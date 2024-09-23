@@ -6,19 +6,15 @@ public class Composant {
 
         private Integer composantId;
         private String nom;
-        private Double coutUnitaire;
-        private Double quantite;
         private Double tauxTVA;
         private TypeComposant typeComposant;
         private Integer ProjetId;
 
 
-        public Composant(Integer composantId, String nom, Double coutUnitaire, Double quantite, Double tauxTVA,
+        public Composant(Integer composantId, String nom, Double tauxTVA,
                          TypeComposant typeComposant, Integer ProjetId) {
             this.composantId = composantId;
             this.nom = nom;
-            this.coutUnitaire = coutUnitaire;
-            this.quantite = quantite;
             this.tauxTVA = tauxTVA;
             this.typeComposant = typeComposant;
             this.ProjetId = ProjetId;
@@ -40,22 +36,6 @@ public class Composant {
 
         public void setNom(String nom) {
             this.nom = nom;
-        }
-
-        public Double getCoutUnitaire() {
-            return coutUnitaire;
-        }
-
-        public void setCoutUnitaire(Double coutUnitaire) {
-            this.coutUnitaire = coutUnitaire;
-        }
-
-        public Double getQuantite() {
-            return quantite;
-        }
-
-        public void setQuantite(Double quantite) {
-            this.quantite = quantite;
         }
 
         public Double getTauxTVA() {
@@ -86,8 +66,6 @@ public class Composant {
         public String toString() {
             return composantId +
                     ": nom='" + nom + '\'' +
-                    ", coutUnitaire=" + coutUnitaire +
-                    ", quantite=" + quantite +
                     ", tauxTVA=" + tauxTVA +
                     ", typeComposant=" + typeComposant +
                     ", ProjetId=" + ProjetId;
