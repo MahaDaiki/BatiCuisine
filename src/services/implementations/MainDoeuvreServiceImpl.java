@@ -15,7 +15,9 @@ public class MainDoeuvreServiceImpl  implements MainDoeuvreService {
     }
 
     @Override
-    public double calculateTauxHoraire(double couTotal, double heuresTravaille) {
-        return mainDoeuvreRepository.calculateTauxHoraire(couTotal, heuresTravaille);
+    public double calculeMaiOuvreTotal(int projetId) {
+        return mainDoeuvreRepository.calculeMaiOuvreTotal(projetId);
     }
+
+
 }

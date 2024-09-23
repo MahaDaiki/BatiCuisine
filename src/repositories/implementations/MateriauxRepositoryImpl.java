@@ -6,6 +6,7 @@ import repositories.interfaces.MateriauxRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MateriauxRepositoryImpl implements MateriauxRepository {
@@ -32,5 +33,26 @@ public class MateriauxRepositoryImpl implements MateriauxRepository {
             System.err.println("Failed to add Matériaux: " + e.getMessage());
         }
         }
+
+    @Override
+    public double calculateTotalMaterialCost(int projetId) {
+
+        String sql = "SELECT (cout_unitaire * quantite * coefficient_qualite + cout_transport) * taux_TVA AS total_cost " +
+                "FROM materiaux WHERE projet_id = ?";
+        double totalCost = 0.0;
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, projetId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                totalCost += rs.getDouble("total_cost");
+            }
+        } catch (SQLException e) {
+            System.err.println("Failed to calculate total material cost: " + e.getMessage());
+        }
+
+        return totalCost;
     }
+}
 

@@ -12,4 +12,6 @@ public interface ProjetService {
     void updateProjetStatus(Projet projet, int projet_id);
     int getLastInsertedProjetId();
     HashMap<String, Object> getProjectAndClientDetails(int projetId);
+
+
 }
