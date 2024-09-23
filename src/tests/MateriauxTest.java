@@ -21,22 +21,22 @@ public class MateriauxTest {
         do {
             System.out.println("*--- Ajout des matériaux ---*");
 
-            System.out.print("Entrez le nom du matériau : ");
+            System.out.println("Entrez le nom du matériau : ");
             String nom = scanner.nextLine();
 
-            System.out.print("Entrez la quantité de ce matériau  : ");
+            System.out.println("Entrez la quantité de ce matériau  : ");
             double quantite = scanner.nextDouble();
 
-            System.out.print("Entrez le coût unitaire de ce matériau Dh : ");
+            System.out.println("Entrez le coût unitaire de ce matériau Dh : ");
             double coutUnitaire = scanner.nextDouble();
 
-            System.out.print("Entrez le coût de transport de ce matériau (Dh) : ");
+            System.out.println("Entrez le coût de transport de ce matériau (Dh) : ");
             double coutTransport = scanner.nextDouble();
 
-            System.out.print("Entrez le coefficient de qualité du matériau (1.0 = standard, > 1.0 = haute qualité) : ");
+            System.out.println("Entrez le coefficient de qualité du matériau (1.0 = standard, > 1.0 = haute qualité) : ");
             double coefficientQualite = scanner.nextDouble();
 
-            System.out.print("Entrez le taux TVA : ");
+            System.out.println("Entrez le taux TVA : ");
             double tauxTVA = scanner.nextDouble();
 
 
