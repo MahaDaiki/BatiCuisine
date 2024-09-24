@@ -11,7 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ProjetServiceImpl implements ProjetService {
-final ProjetRepository projetRepository = new ProjetRepositoryImpl();
+final ProjetRepository projetRepository;
+
+
+    public ProjetServiceImpl(ProjetRepository projetRepository) {
+        this.projetRepository = projetRepository;
+    }
 
     @Override
     public void addProjet(Projet projet, int client_id) {

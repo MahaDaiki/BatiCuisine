@@ -5,6 +5,7 @@ import repositories.implementations.MateriauxRepositoryImpl;
 import services.implementations.MateriauxServiceImpl;
 import services.interfaces.MateriauxService;
 import entities.Materiaux;
+import utils.InputValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +15,7 @@ public class MateriauxTest {
     static final Scanner scanner = new Scanner(System.in);
     static final MateriauxService Materiaux = new MateriauxServiceImpl(new MateriauxRepositoryImpl());
 
-    public static void main(String[] args) {
 
-    }
 
     public static void AddMateriaux(int projetId) {
 
@@ -26,21 +25,73 @@ public class MateriauxTest {
 
             System.out.println("Entrez le nom du matériau : ");
             String nom = scanner.nextLine();
+            while (!InputValidator.validateString(nom)) {
+                System.out.print("Nom invalide. Veuillez entrer un nom valide : ");
+                nom = scanner.nextLine();
+            }
 
-            System.out.println("Entrez la quantité de ce matériau  : ");
-            double quantite = scanner.nextDouble();
+            double quantite;
+            while (true) {
+                System.out.print("Entrez la quantité de ce matériau : ");
+                String inputQuantite = scanner.nextLine();
+                if (InputValidator.validateDouble(inputQuantite)) {
+                    quantite = Double.parseDouble(inputQuantite);
+                    break;
+                } else {
+                    System.out.print("Quantité invalide. Veuillez entrer un nombre valide : ");
+                }
+            }
 
-            System.out.println("Entrez le coût unitaire de ce matériau Dh : ");
-            double coutUnitaire = scanner.nextDouble();
+            double coutUnitaire;
+            while (true) {
+                System.out.print("Entrez le coût unitaire de ce matériau (Dh) : ");
+                String inputCoutUnitaire = scanner.nextLine();
+                if (InputValidator.validateDouble(inputCoutUnitaire)) {
+                    coutUnitaire = Double.parseDouble(inputCoutUnitaire);
+                    break;
+                } else {
+                    System.out.print("Coût unitaire invalide. Veuillez entrer un nombre valide : ");
+                }
+            }
 
-            System.out.println("Entrez le coût de transport de ce matériau (Dh) : ");
-            double coutTransport = scanner.nextDouble();
 
-            System.out.println("Entrez le coefficient de qualité du matériau (1.0 = standard, > 1.0 = haute qualité) : ");
-            double coefficientQualite = scanner.nextDouble();
+            double coutTransport;
+            while (true) {
+                System.out.print("Entrez le coût de transport de ce matériau (Dh) : ");
+                String inputCoutTransport = scanner.nextLine();
+                if (InputValidator.validateDouble(inputCoutTransport)) {
+                    coutTransport = Double.parseDouble(inputCoutTransport);
+                    break;
+                } else {
+                    System.out.print("Coût de transport invalide. Veuillez entrer un nombre valide : ");
+                }
+            }
 
-            System.out.println("Entrez le taux TVA : ");
-            double tauxTVA = scanner.nextDouble();
+
+            double coefficientQualite;
+            while (true) {
+                System.out.print("Entrez le coefficient de qualité du matériau (1.0 = standard, > 1.0 = haute qualité) : ");
+                String inputCoefficientQualite = scanner.nextLine();
+                if (InputValidator.validateDouble(inputCoefficientQualite)) {
+                    coefficientQualite = Double.parseDouble(inputCoefficientQualite);
+                    break;
+                } else {
+                    System.out.print("Coefficient de qualité invalide. Veuillez entrer un nombre valide : ");
+                }
+            }
+
+            double tauxTVA;
+            while (true) {
+                System.out.print("Entrez le taux TVA %: ");
+                String inputTauxTVA = scanner.nextLine();
+                if (InputValidator.validateDouble(inputTauxTVA)) {
+                    tauxTVA = Double.parseDouble(inputTauxTVA);
+                    break;
+                } else {
+                    System.out.print("Taux TVA invalide. Veuillez entrer un nombre valide : ");
+                }
+            }
+
 
 
             scanner.nextLine();

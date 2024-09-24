@@ -5,12 +5,14 @@ import entities.Projet;
 import enums.EtatProjet;
 import repositories.implementations.MainDoeuvreRepositoryImpl;
 import repositories.implementations.MateriauxRepositoryImpl;
+import repositories.implementations.ProjetRepositoryImpl;
 import services.implementations.MainDoeuvreServiceImpl;
 import services.implementations.MateriauxServiceImpl;
 import services.implementations.ProjetServiceImpl;
 import services.interfaces.MainDoeuvreService;
 import services.interfaces.MateriauxService;
 import services.interfaces.ProjetService;
+import utils.InputValidator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,21 +20,32 @@ import java.util.Scanner;
 
 public class GestionProjetTest {
     static final Scanner scanner = new Scanner(System.in);
-    static final ProjetService projetService = new ProjetServiceImpl();
+    static final ProjetService projetService = new ProjetServiceImpl(new ProjetRepositoryImpl());
     static final MainDoeuvreService mainDoeuvreService = new MainDoeuvreServiceImpl(new MainDoeuvreRepositoryImpl());
     static final MateriauxService materiauxService = new MateriauxServiceImpl(new MateriauxRepositoryImpl());
-    public static void main(String[] args) {
-        displayallprojet();
-    }
+
 
         static void ajouterUnProjet(int clientId){
 
 
             System.out.print("Entrez le nom du projet: ");
             String nomProjet = scanner.nextLine();
+            while (!InputValidator.validateString(nomProjet)) {
+                System.out.print("Nom de projet invalide. Veuillez entrer un nom valide: ");
+                nomProjet = scanner.nextLine();
+            }
 
-            System.out.print("Entrez la surface du projet: ");
-            double surface = scanner.nextDouble();
+            double surface;
+            while (true) {
+                System.out.print("Entrez la surface du projet (en m²): ");
+                String inputSurface = scanner.nextLine();
+                if (InputValidator.validateDouble(inputSurface)) {
+                    surface = Double.parseDouble(inputSurface);
+                    break;
+                } else {
+                    System.out.print("Surface invalide. Veuillez entrer un nombre valide: ");
+                }
+            }
 
             Projet projet = new Projet(null, nomProjet, null, null, EtatProjet.EnCours, surface, clientId);
 
@@ -111,7 +124,7 @@ public class GestionProjetTest {
                     displayprojetdetails(projetId);
                     break;
                 case 2:
-                    GestionClientTest.NouveauProjet();
+                    MenusTest.menu();
                     break;
                 default:
                     System.out.println("Choix invalide. Veuillez ressayer.");

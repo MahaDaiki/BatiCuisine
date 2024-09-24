@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class MenusTest {
     static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        menu();
-    }
+//    public static void main(String[] args) {
+//        menu();
+//    }
 
     public static void menu() {
         while (true) {
@@ -17,8 +17,7 @@ public class MenusTest {
             System.out.println("=====================================");
             System.out.println("|  1. Créer un nouveau projet        |");
             System.out.println("|  2. Afficher les projets existants |");
-            System.out.println("|  3. Calculer le coût d'un projet   |");
-            System.out.println("|  4. Quitter                        |");
+            System.out.println("|  3. Quitter                        |");
             System.out.println("=====================================");
             System.out.print("---> ");
 
@@ -33,9 +32,6 @@ public class MenusTest {
                         GestionProjetTest.displayallprojet();
                     break;
                 case 3:
-
-                    break;
-                case 4:
 
                     System.out.println(" Au revoir !");
                     return;

@@ -4,6 +4,7 @@ import entities.MainDoeuvre;
 import repositories.implementations.MainDoeuvreRepositoryImpl;
 import services.implementations.MainDoeuvreServiceImpl;
 import services.interfaces.MainDoeuvreService;
+import utils.InputValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +14,6 @@ public class GestionDesMainDoeuvreTest {
     static final Scanner scanner = new Scanner(System.in);
     static final MainDoeuvreService maindoeuvre = new MainDoeuvreServiceImpl(new MainDoeuvreRepositoryImpl());
 
-    public static void main(String[] arg){
-
-    }
 
     public static void AddMainDoeuvre(int projetId){
 
@@ -25,18 +23,58 @@ public class GestionDesMainDoeuvreTest {
 
             System.out.print("Entrez main-d'œuvre : ");
             String nom = scanner.nextLine();
+            while (!InputValidator.validateString(nom)) {
+                System.out.print("Nom invalide. Veuillez entrer un nom valide : ");
+                nom = scanner.nextLine();
+            }
 
-            System.out.print("Entrez le taux horaire de cette main-d'œuvre (dh/h) : ");
-            double tauxHoraire = scanner.nextDouble();
+            double tauxHoraire;
+            while (true) {
+                System.out.print("Entrez le taux horaire de cette main-d'œuvre (dh/h) : ");
+                String inputTauxHoraire = scanner.nextLine();
+                if (InputValidator.validateDouble(inputTauxHoraire)) {
+                    tauxHoraire = Double.parseDouble(inputTauxHoraire);
+                    break;
+                } else {
+                    System.out.print("Taux horaire invalide. Veuillez entrer un nombre valide : ");
+                }
+            }
 
-            System.out.print("Entrez les heures  de travail : ");
-            double heuresTravaillees = scanner.nextDouble();
+            double heuresTravaillees;
+            while (true) {
+                System.out.print("Entrez les heures de travail : ");
+                String inputHeuresTravaillees = scanner.nextLine();
+                if (InputValidator.validateDouble(inputHeuresTravaillees)) {
+                    heuresTravaillees = Double.parseDouble(inputHeuresTravaillees);
+                    break;
+                } else {
+                    System.out.print("Heures de travail invalides. Veuillez entrer un nombre valide : ");
+                }
+            }
 
-            System.out.print("Entrez le facteur de productivité (1.0 = standard, > 1.0 = haute productivité) : ");
-            double productivite = scanner.nextDouble();
+            double productivite;
+            while (true) {
+                System.out.print("Entrez le facteur de productivité (1.0 = standard, > 1.0 = haute productivité) : ");
+                String inputProductivite = scanner.nextLine();
+                if (InputValidator.validateDouble(inputProductivite)) {
+                    productivite = Double.parseDouble(inputProductivite);
+                    break;
+                } else {
+                    System.out.print("Facteur de productivité invalide. Veuillez entrer un nombre valide : ");
+                }
+            }
 
-            System.out.print("Entrez le Taux TVA : ");
-            double tauxTVA = scanner.nextDouble();
+            double tauxTVA;
+            while (true) {
+                System.out.print("Entrez le Taux TVA : ");
+                String inputTauxTVA = scanner.nextLine();
+                if (InputValidator.validateDouble(inputTauxTVA)) {
+                    tauxTVA = Double.parseDouble(inputTauxTVA);
+                    break;
+                } else {
+                    System.out.print("Taux TVA invalide. Veuillez entrer un nombre valide : ");
+                }
+            }
 
 
             scanner.nextLine();

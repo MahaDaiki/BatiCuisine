@@ -9,7 +9,10 @@ import java.util.Optional;
 
 public class ClientServiceImpl implements ClientService {
 
-    final ClientRepositoryInt clientRepositoryInt = new ClientRepositoryImpl();
+    final ClientRepositoryInt clientRepositoryInt ;
+    public ClientServiceImpl(ClientRepositoryInt clientRepository) {
+        this.clientRepositoryInt = clientRepository;
+    }
     @Override
     public void addClient(Client client) {
         clientRepositoryInt.add(client);
