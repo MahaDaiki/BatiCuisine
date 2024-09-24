@@ -3,6 +3,8 @@ package tests;
 import entities.Client;
 import entities.Projet;
 import enums.EtatProjet;
+import repositories.implementations.MainDoeuvreRepositoryImpl;
+import repositories.implementations.MateriauxRepositoryImpl;
 import services.implementations.MainDoeuvreServiceImpl;
 import services.implementations.MateriauxServiceImpl;
 import services.implementations.ProjetServiceImpl;
@@ -17,8 +19,8 @@ import java.util.Scanner;
 public class GestionProjetTest {
     static final Scanner scanner = new Scanner(System.in);
     static final ProjetService projetService = new ProjetServiceImpl();
-    static final MainDoeuvreService mainDoeuvreService =  new MainDoeuvreServiceImpl();
-    static final MateriauxService materiauxService = new MateriauxServiceImpl();
+    static final MainDoeuvreService mainDoeuvreService = new MainDoeuvreServiceImpl(new MainDoeuvreRepositoryImpl());
+    static final MateriauxService materiauxService = new MateriauxServiceImpl(new MateriauxRepositoryImpl());
     public static void main(String[] args) {
         displayallprojet();
     }
@@ -190,7 +192,6 @@ public class GestionProjetTest {
                     break;
                 default:
                     System.out.println("Choix invalide, veuillez choisir 1, 2 ou 3.");
-
             }
         }
 
@@ -200,15 +201,17 @@ public class GestionProjetTest {
 
         System.out.println("Projet mis à jour avec succès !");
         System.out.println("Nouveau statut : " + projet.getEtat_projet());
+        projetdetailmenu(projetId);
     }
 
     public static void projetdetailmenu(int projetId){
         while (true) {
-            System.out.println("=====================================");
-            System.out.println("|  1. Changer le statut du projet    |");
-            System.out.println("|  2. Afficher les détails du devis  |");
-            System.out.println("|  3. Quitter                        |");
-            System.out.println("=====================================");
+            System.out.println("=========================================");
+            System.out.println("|  1. Changer le statut du projet        |");
+            System.out.println("|  2. Afficher les détails du devis      |");
+            System.out.println("|  3. Afficher les détails des composant |");
+            System.out.println("|  4. <---- Retour                       |");
+            System.out.println("=========================================");
             System.out.print("---> ");
 
             int choice = scanner.nextInt();
@@ -222,13 +225,17 @@ public class GestionProjetTest {
                 case 2:
                         GestionduDevisTest.AffichageDevis(projetId);
                     break;
-
                 case 3:
+                    GestionDesMainDoeuvreTest.getmaindoeuvre(projetId);
+                    MateriauxTest.getMateriaux(projetId);
+                    break;
+                case 4:
                     System.out.println("Au revoir !");
-                    return;
+                    displayallprojet();
+                   break;
 
                 default:
-                    System.out.println("Choix invalide, veuillez choisir entre 1, 2, ou 3.");
+                    System.out.println("Choix invalide.");
             }
         }
     }

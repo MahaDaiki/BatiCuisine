@@ -8,6 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 public class MainDoeuvreRepositoryImpl implements MainDoeuvreRepository {
     final Connection connection = DatabaseConnection.getInstance().getConnection();
@@ -48,6 +52,40 @@ public class MainDoeuvreRepositoryImpl implements MainDoeuvreRepository {
         }
 
         return totalCost;
+    }
+
+    @Override
+    public Optional<List<MainDoeuvre>> getMainDoeuvreByProjetId(Integer projetId) {
+        List<MainDoeuvre> mainDoeuvreList = new ArrayList<>();
+        String query = "SELECT * FROM main_doeuvre WHERE projet_id = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, projetId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Integer composantId = rs.getInt("composant_id");
+                    String nom = rs.getString("nom");
+                    Double tauxTVA = rs.getDouble("taux_TVA");
+                    Double tauxHoraire = rs.getObject("taux_horaire", Double.class);
+                    Double heuresTravail = rs.getObject("heures_travail", Double.class);
+                    Double productiviteOuvrier = rs.getObject("productivite_ouvrier", Double.class);
+
+                    // Assign default values if necessary
+                    tauxHoraire = (tauxHoraire != null) ? tauxHoraire : 0.0;
+                    heuresTravail = (heuresTravail != null) ? heuresTravail : 0.0;
+                    productiviteOuvrier = (productiviteOuvrier != null) ? productiviteOuvrier : 1.0;
+
+                    MainDoeuvre mainDoeuvre = new MainDoeuvre(composantId, nom, tauxTVA, tauxHoraire, heuresTravail, productiviteOuvrier, projetId);
+                    mainDoeuvreList.add(mainDoeuvre);
+                }
+            }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+
+                return mainDoeuvreList.isEmpty() ? Optional.empty() : Optional.of(mainDoeuvreList);
     }
 
 

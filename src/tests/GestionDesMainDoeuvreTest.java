@@ -1,14 +1,17 @@
 package tests;
 
 import entities.MainDoeuvre;
+import repositories.implementations.MainDoeuvreRepositoryImpl;
 import services.implementations.MainDoeuvreServiceImpl;
 import services.interfaces.MainDoeuvreService;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class GestionDesMainDoeuvreTest {
     static final Scanner scanner = new Scanner(System.in);
-    static final MainDoeuvreService maindoeuvre = new MainDoeuvreServiceImpl();
+    static final MainDoeuvreService maindoeuvre = new MainDoeuvreServiceImpl(new MainDoeuvreRepositoryImpl());
 
     public static void main(String[] arg){
 
@@ -61,6 +64,17 @@ public class GestionDesMainDoeuvreTest {
 
         System.out.println("<----- Retour.");
         GestionProjetTest.lastinsertedprojet();
+    }
+
+    public static void getmaindoeuvre(int projetId){
+
+        Optional<List<MainDoeuvre>> mainDoeuvreList = maindoeuvre.getMainDoeuvreByProjetId(projetId);
+        if (mainDoeuvreList.isPresent()) {
+            System.out.println("==== Main d'Œuvre ====");
+            mainDoeuvreList.get().forEach(mainDoeuvre -> System.out.println(mainDoeuvre.toString()));
+        } else {
+            System.out.println("Aucune main d'œuvre trouvée pour le projet ID: " + projetId);
+        }
     }
 }
 
