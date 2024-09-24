@@ -87,9 +87,10 @@ public class ProjetRepositoryImpl implements ProjetRepository {
 
     @Override
     public void updateProjetStatus(Projet projet, int projet_id) {
-        String sql = " UPDATE projets SET etat_projet = ? WHERE projet_id = ? ";
+        String sql = " UPDATE projets SET etat_projet = CAST(? AS etat_projet) WHERE projet_id = ? ";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, projet.getEtat_projet().name());
+            pstmt.setInt(2, projet_id);
             pstmt.executeUpdate();
             System.out.println(" ETAT DU PROJET MODIFIE!");
         } catch (SQLException e) {

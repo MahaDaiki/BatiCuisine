@@ -59,7 +59,6 @@ public class GestionProjetTest {
             System.out.println("2. Ajouter de la main-d'œuvre");
             System.out.println("3. Finaliser le Projet");
             System.out.print("----> ");
-
             choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -75,6 +74,7 @@ public class GestionProjetTest {
                     break;
                 default:
                     System.out.println("Choix invalide. Veuillez réessayer.");
+                    ComposantMenu(projetId);
             }
         } while (choice != 4);
     }
@@ -95,8 +95,7 @@ public class GestionProjetTest {
             }
            System.out.println("\n-----------------------");
             System.out.println("1_ Detail Du Projet.");
-            System.out.println("2_ Modifier Status du Projet");
-            System.out.println("3_ <------ Menu");
+            System.out.println("2_ <------ Menu");
         System.out.print("----> ");
 
        int choice = scanner.nextInt();
@@ -110,13 +109,11 @@ public class GestionProjetTest {
                     displayprojetdetails(projetId);
                     break;
                 case 2:
-
-                    break;
-                case 3:
                     GestionClientTest.NouveauProjet();
                     break;
                 default:
                     System.out.println("Choix invalide. Veuillez ressayer.");
+                    displayallprojet();
 
             }
     }
@@ -138,6 +135,7 @@ public class GestionProjetTest {
                 System.out.println("No associated client found.");
             }
         }
+        projetdetailmenu(projetId);
     }
 
     private static void updateMargeBeneficiaireEtCoutTotal(int projetId) {
@@ -163,6 +161,81 @@ public class GestionProjetTest {
         GestionduDevisTest.createDevis(totalCost,margeBeneficiaire,projetId);
 
     }
+    private static void updateProjectStatus(int projetId) {
+
+        EtatProjet etatProjet = null;
+        boolean validChoice = false;
+
+        while (!validChoice) {
+            System.out.println("Choisissez un statut pour le projet :");
+            System.out.println("1. EnCours");
+            System.out.println("2. Termine");
+            System.out.println("3. Annule");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    etatProjet = EtatProjet.EnCours;
+                    validChoice = true;
+                    break;
+                case 2:
+                    etatProjet = EtatProjet.Termine;
+                    validChoice = true;
+                    break;
+                case 3:
+                    etatProjet = EtatProjet.Annule;
+                    validChoice = true;
+                    break;
+                default:
+                    System.out.println("Choix invalide, veuillez choisir 1, 2 ou 3.");
+
+            }
+        }
+
+        Projet projet = new Projet(projetId, null, null, null, etatProjet, null, null);
+
+        projetService.updateProjetStatus(projet, projetId);
+
+        System.out.println("Projet mis à jour avec succès !");
+        System.out.println("Nouveau statut : " + projet.getEtat_projet());
+    }
+
+    public static void projetdetailmenu(int projetId){
+        while (true) {
+            System.out.println("=====================================");
+            System.out.println("|  1. Changer le statut du projet    |");
+            System.out.println("|  2. Afficher les détails du devis  |");
+            System.out.println("|  3. Quitter                        |");
+            System.out.println("=====================================");
+            System.out.print("---> ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    updateProjectStatus(projetId);
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+                    System.out.println("Au revoir !");
+                    return;
+
+                default:
+                    System.out.println("Choix invalide, veuillez choisir entre 1, 2, ou 3.");
+            }
+        }
+    }
+
+
+
+
 
 
 
