@@ -72,12 +72,15 @@ public class Devis {
 
     @Override
     public String toString() {
-        return  devisId +
-                ", montantEstime=" + montantEstime +
-                ", date d'Emission=" + dateEmission +
-                ", date de Validite=" + dateValidite +
-                ", accepte=" + accepte +
-                ", projetId=" + projetId ;
+        return "=====================================\n" +
+                "| Devis ID: " + devisId + "\n" +
+                "| Montant Estimé: " + montantEstime + "\n" +
+                "| Date d'Émission: " + dateEmission + "\n" +
+                "| Date de Validité: " + dateValidite + "\n" +
+                "| Accepté: " + (accepte ? "Oui" : "Non") + "\n" +
+                "| Projet ID: " + projetId + "\n" +
+                "=====================================";
     }
+
 }
 

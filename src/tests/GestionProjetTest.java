@@ -220,7 +220,7 @@ public class GestionProjetTest {
                     break;
 
                 case 2:
-
+                        GestionduDevisTest.AffichageDevis(projetId);
                     break;
 
                 case 3:

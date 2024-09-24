@@ -11,4 +11,9 @@ public class DevisServiceImpl implements DevisService {
     public void addDevis(Devis devis) {
         devisRepository.addDevis(devis);
     }
+
+    @Override
+    public Devis getDevisByProjetId(int projetId) {
+        return devisRepository.getDevisByProjetId(projetId);
+    }
 }

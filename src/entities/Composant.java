@@ -64,11 +64,13 @@ public class Composant {
 
         @Override
         public String toString() {
-            return composantId +
-                    ": nom='" + nom + '\'' +
-                    ", tauxTVA=" + tauxTVA +
-                    ", typeComposant=" + typeComposant +
-                    ", ProjetId=" + ProjetId;
+            return "=====================================\n" +
+                    "| Composant ID: " + composantId + "\n" +
+                    "| Nom: " + nom + "\n" +
+                    "| Taux TVA: " + tauxTVA + "\n" +
+                    "| Type Composant: " + typeComposant + "\n" +
+                    "| Projet ID: " + ProjetId + "\n" +
+                    "=====================================";
         }
 
 
