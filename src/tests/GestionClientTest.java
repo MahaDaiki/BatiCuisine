@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class GestionClientTest {
     static final Scanner scanner = new Scanner(System.in);
     static final ClientService clientService = new ClientServiceImpl(new ClientRepositoryImpl());
-    InputValidator validator = InputValidator.getInstance();
+
 //    public static void main(String[] args) {
 //        NouveauProjet();
 //    }
