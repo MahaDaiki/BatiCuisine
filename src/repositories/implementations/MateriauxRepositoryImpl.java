@@ -8,6 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 public class MateriauxRepositoryImpl implements MateriauxRepository {
     final Connection connection = DatabaseConnection.getInstance().getConnection();
@@ -53,6 +57,40 @@ public class MateriauxRepositoryImpl implements MateriauxRepository {
         }
 
         return totalCost;
+    }
+
+    @Override
+    public Optional<List<Materiaux>> getMateriauxByProjetId(Integer projetId) {
+        List<Materiaux> materiauxList = new ArrayList<>();
+        String query = "SELECT * FROM materiaux WHERE projet_id = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, projetId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Integer composantId = rs.getInt("composant_id");
+                    String nom = rs.getString("nom");
+                    Double tauxTVA = rs.getDouble("taux_TVA");
+                    Double coutUnitaire = rs.getDouble("cout_unitaire");
+                    Double quantite = rs.getDouble("quantite");
+                    Double coefficientQualite = rs.getObject("coefficient_qualite", Double.class);
+                    Double coutTransport = rs.getObject("cout_transport", Double.class);
+
+
+                    coefficientQualite = (coefficientQualite != null) ? coefficientQualite : 1.0;
+                    coutTransport = (coutTransport != null) ? coutTransport : 0.0;
+
+                    Materiaux materiaux = new Materiaux(composantId, nom, coutUnitaire, quantite, tauxTVA, projetId, coefficientQualite, coutTransport);
+                    materiauxList.add(materiaux);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return materiauxList.isEmpty() ? Optional.empty() : Optional.of(materiauxList);
     }
 }
 

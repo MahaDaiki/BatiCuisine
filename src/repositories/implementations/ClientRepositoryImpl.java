@@ -2,19 +2,14 @@ package repositories.implementations;
 
 import database.DatabaseConnection;
 import entities.Client;
-import entities.Projet;
-import enums.EtatProjet;
-import repositories.interfaces.ClientRepository;
+import repositories.interfaces.ClientRepositoryInt;
 import utils.InputValidator;
 
 import java.sql.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
-public class ClientRepositoryImpl implements ClientRepository {
+public class ClientRepositoryImpl implements ClientRepositoryInt {
     final Connection connection = DatabaseConnection.getInstance().getConnection();
     final InputValidator validator = InputValidator.getInstance();
 

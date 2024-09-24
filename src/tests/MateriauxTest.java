@@ -1,15 +1,18 @@
 package tests;
 
 import enums.TypeComposant;
+import repositories.implementations.MateriauxRepositoryImpl;
 import services.implementations.MateriauxServiceImpl;
 import services.interfaces.MateriauxService;
 import entities.Materiaux;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class MateriauxTest {
     static final Scanner scanner = new Scanner(System.in);
-    static final MateriauxService Materiaux = new MateriauxServiceImpl();
+    static final MateriauxService Materiaux = new MateriauxServiceImpl(new MateriauxRepositoryImpl());
 
     public static void main(String[] args) {
 
@@ -68,6 +71,16 @@ public class MateriauxTest {
 
         System.out.println("<----- Retour.");
         GestionProjetTest.lastinsertedprojet();
+    }
+
+    public static void getMateriaux(int projetId) {
+        Optional<List<Materiaux>> materiauxList = Materiaux.getMateriauxByProjetId(projetId);
+        if (materiauxList.isPresent()) {
+            System.out.println("==== Matériaux ====");
+            materiauxList.get().forEach(materiaux -> System.out.println(materiaux.toString()));
+        } else {
+            System.out.println("Aucun matériaux trouvé pour le projet ID: " + projetId);
+        }
     }
 
 }
