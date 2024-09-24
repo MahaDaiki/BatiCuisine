@@ -43,14 +43,14 @@ public class MainDoeuvre extends Composant {
 
     @Override
     public String toString() {
-        return "MainDoeuvre{" +
-                "composantId=" + getComposantId() +
-                ", nom='" + getNom() + '\'' +
-                ", tauxTVA=" + getTauxTVA() +
-                ", typeComposant=" + getTypeComposant() +
-                ", tauxHoraire=" + tauxHoraire +
-                ", heuresTravail=" + heuresTravail +
-                ", productiviteOuvrier=" + productiviteOuvrier +
-                '}';
+        return "=====================================\n" +
+                "| Main d'Œuvre ID: " + getComposantId() + "\n" +
+                "| Nom: " + getNom() + "\n" +
+                "| Taux TVA: " + getTauxTVA() + "\n" +
+                "| Type Composant: " + getTypeComposant() + "\n" +
+                "| Taux Horaire: " + tauxHoraire + "\n" +
+                "| Heures de Travail: " + heuresTravail + "\n" +
+                "| Productivité Ouvrier: " + productiviteOuvrier + "\n" +
+                "=====================================";
     }
 }

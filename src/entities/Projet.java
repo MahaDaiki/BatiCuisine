@@ -84,12 +84,14 @@ public class Projet {
 
         @Override
         public String toString() {
-            return   projetId +
-                    "_ Nom du Projet: " + nomProjet + '|' +
-                    " margeBeneficiaire: " + margeBeneficiaire +"| surface: " + surface +
-                    "| coutTotal: " + coutTotal +
-                    "| etat_projet: " + etat_projet
-                    ;
+            return "=====================================\n" +
+                    "| Projet ID: " + projetId + "\n" +
+                    "| Nom du Projet: " + nomProjet + "\n" +
+                    "| Marge Bénéficiaire: " + margeBeneficiaire + "\n" +
+                    "| Surface: " + surface + "\n" +
+                    "| Coût Total: " + coutTotal + "\n" +
+                    "| État du Projet: " + etat_projet + "\n" +
+                    "=====================================";
         }
 
 

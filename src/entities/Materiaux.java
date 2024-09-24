@@ -46,13 +46,15 @@ public class Materiaux extends Composant{
     }
     @Override
     public String toString() {
-        return "Materiaux:" + getComposantId() +
-                "_" + getNom() + '\'' +
-                ", coutUnitaire=" + getCoutUnitaire() +
-                ", quantite=" + getQuantite() +
-                ", tauxTVA=" + getTauxTVA() +
-                ", coefficientQualite=" + coefficientQualite +
-                ", coutTransport=" + coutTransport ;
+        return "=====================================\n" +
+                "| Matériaux ID: " + getComposantId() + "\n" +
+                "| Nom: " + getNom() + "\n" +
+                "| Coût Unitaire: " + getCoutUnitaire() + "\n" +
+                "| Quantité: " + getQuantite() + "\n" +
+                "| Taux TVA: " + getTauxTVA() + "\n" +
+                "| Coefficient Qualité: " + coefficientQualite + "\n" +
+                "| Coût Transport: " + coutTransport + "\n" +
+                "=====================================";
     }
 
 

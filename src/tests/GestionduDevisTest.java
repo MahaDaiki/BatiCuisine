@@ -57,4 +57,15 @@ public class GestionduDevisTest {
         MenusTest.menu();
 
     }
+
+    static void AffichageDevis(int projet_id){
+        Devis devis = devisService.getDevisByProjetId(projet_id);
+
+        if (devis != null) {
+            System.out.println("Détails du devis : " + devis);
+        } else {
+            System.out.println("Aucun devis trouvé pour le projet avec ID : " + projet_id);
+        }
+
+    }
 }
